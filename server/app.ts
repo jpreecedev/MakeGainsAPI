@@ -7,7 +7,8 @@ import { loginRouter } from './routes/login';
 import { protectedRouter } from './routes/protected';
 import { publicRouter } from './routes/public';
 import { feedRouter } from './routes/feed';
-import { userRouter } from "./routes/user";
+import { userRouter } from './routes/user';
+import { fitbitRouter } from './routes/fitbit';
 
 const app: express.Application = express();
 
@@ -23,6 +24,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/public', publicRouter);
 app.use('/api/feed', feedRouter);
 app.use('/api/user', userRouter);
+app.use('/api/fitbit', fitbitRouter);
 
 if (app.get('env') === 'production') {
 
