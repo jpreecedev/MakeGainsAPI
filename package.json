@@ -1,7 +1,7 @@
 {
-  "name": "MakeGains Fitness Club",
+  "name": "makegains",
   "version": "1.0.0",
-  "description": "Just one geek trying to make gains",
+  "description": "Code base for MakeGains.club",
   "main": "server/app.js",
   "license": "MIT",
   "angular-cli": {},
