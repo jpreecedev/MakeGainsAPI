@@ -2,24 +2,33 @@ import { Request, Response } from 'express';
 import User, { IUser } from './user.model';
 
 const get = (request: Request, response: Response, next: Function) => {
-    console.log("fuck off 2");
-
-let newUser = User({
-  name: 'Peter Quill',
-  username: 'starlord55',
-  password: 'password',
-  admin: true
-});
-
-newUser.save((err) => {
-    User.find({}, (err, users: IUser[]) => {
+    User.find({ encoded_id: request.params.encodedId }, (err, users: IUser[]) => {
         if (err) {
             return next(err);
         }
         return next(err, users);
     });
-});
-    console.log("fuck off");
 };
 
-export default { get };
+const addOrUpdate = (fitbitUser: any, request: Request, response: Response, next: Function) => {
+
+    User.find({ encoded_id: fitbitUser.user.encodedId }, (err, result) => {
+        if (err) {
+            return next(err);
+        }
+
+        if (!result || !result.length) {
+            let user = User({
+                access_token: fitbitUser.access_token,
+                encoded_id: fitbitUser.user.encodedId
+            });
+            user.save(() => {
+                return next();
+            });
+        } else {
+            return next(result[0]);
+        }
+    });
+};
+
+export default { get, addOrUpdate };
