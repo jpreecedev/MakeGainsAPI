@@ -9,8 +9,37 @@ import { publicRouter } from './routes/public';
 import { feedRouter } from './routes/feed';
 import { userRouter } from './routes/user';
 import { fitbitRouter } from './routes/fitbit';
+import mongoose = require('mongoose');
+
+import * as config from './config';
 
 const app: express.Application = express();
+
+let mongodbUrl = 'mongodb://' + config.DB_HOST + ':' + config.DB_PORT + '/' + config.DB_NAME;
+
+let dbOptions = {
+  server: {
+    reconnectTries: -1, // always attempt to reconnect
+    socketOptions: {
+      keepAlive: 120
+    }
+  }
+};
+
+let connectWithRetry = function() {
+  return mongoose.connect(mongodbUrl, dbOptions, function(err) {
+    if (err) {
+      console.error('Failed to connect to mongo on startup - retrying in 5 sec. -> ' + err);
+      setTimeout(connectWithRetry, 5000);
+    }
+  });
+};
+
+connectWithRetry();
+
+mongoose.connection.once('open', function callback() {
+  console.log('Connection with database succeeded.');
+});
 
 app.disable('x-powered-by');
 

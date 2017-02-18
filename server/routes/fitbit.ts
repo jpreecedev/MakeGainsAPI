@@ -1,5 +1,7 @@
 import { Router, Response, Request } from 'express';
 import { getServiceUrl } from '../shared';
+import User from '../models/user/user.controller';
+import { IUser } from '../models/user/user.model';
 
 let Fitbit = require('fitbit-node');
 import { fitbit_oauth_clientid, fitbit_client_secret } from '../config';
@@ -34,11 +36,17 @@ fitbitRouter.get('/callback', function (request: Request, response: Response) {
 });
 
 fitbitRouter.get('/stats', function (request: Request, response: Response) {
-    client.get('/activities/date/2017-02-10.json', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1REROUFIiLCJhdWQiOiIyMjg0TFciLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyc29jIHJhY3QgcnNldCBybG9jIHJ3ZWkgcmhyIHJwcm8gcm51dCByc2xlIiwiZXhwIjoxNDg2OTM4NzAxLCJpYXQiOjE0ODY5MDk5MDF9.-zdja1E22bCjahkAaT0sL9LDNb3tOlq9lOTe86qgpJA').then(function (results) {
-        response.send(results[0]);
-    }).catch(function (error) {
-        response.send(error);
+
+    User.get(request, response, (err, users: IUser[]) => {
+
+        client.get('/activities/date/2017-02-10.json', users[0].access_token).then(function (results) {
+            response.send(results[0]);
+        }).catch(function (error) {
+            response.send(error);
+        });
+
     });
+
 });
 
 fitbitRouter.get('/fat', function (request: Request, response: Response) {
