@@ -45,7 +45,7 @@ export class CalorieChartComponent implements OnInit {
             let _lineChartData: Array<any> = new Array();
             let _lineChartLabels: Array<any> = new Array<any>();
 
-            _lineChartData[0] = { data: new Array(), label: 'Calories Burned' };
+            _lineChartData[0] = { data: new Array(), label: 'Calories Burnt' };
 
             for (let i = 0; i < data.length; i++) {
                 let item = data[i];
