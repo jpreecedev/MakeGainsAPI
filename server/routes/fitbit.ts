@@ -1,5 +1,5 @@
 import { Router, Response, Request } from 'express';
-import { getServiceUrl, FitbitResponse } from '../shared';
+import { getServiceUrl, FitbitResponse, FitbitFat, FitbitStats } from '../shared';
 import User from '../models/user/user.controller';
 import { IUser } from '../models/user/user.model';
 
@@ -36,8 +36,9 @@ router.get('/stats/:encodedId/:date', (request: Request, response: Response) => 
 
     User.getByEncodedId(request.params.encodedId, (err, user: IUser) => {
         client.get(`/activities/date/${request.params.date}.json`, user.access_token)
-            .then((results) => {
-                response.send(results[0]);
+            .then((result) => {
+                let data: FitbitStats = result[0];
+                response.send(data);
             })
             .catch((error) => {
                 response.send(error);
@@ -47,10 +48,11 @@ router.get('/stats/:encodedId/:date', (request: Request, response: Response) => 
 
 router.get('/fat/:encodedId/:from/:to', (request: Request, response: Response) => {
 
-    User.getByEncodedId(request.params.encodedId, (err, user) => {
+    User.getByEncodedId(request.params.encodedId, (err, user: IUser) => {
         client.get(`/body/log/fat/date/${request.params.from}/${request.params.to}.json`, user.access_token)
-            .then((results) => {
-                response.send(results[0]);
+            .then((result) => {
+                let data: FitbitFat[] = result[0].fat;
+                response.send(data);
             })
             .catch((error) => {
                 response.send(error);
