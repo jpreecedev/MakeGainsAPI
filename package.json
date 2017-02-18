@@ -1,7 +1,7 @@
 {
-  "name": "angular2-express-starter",
+  "name": "makegains",
   "version": "1.0.0",
-  "description": "Starter application of Angular2 with Express",
+  "description": "Code base for MakeGains.club",
   "main": "server/app.js",
   "license": "MIT",
   "angular-cli": {},
@@ -16,10 +16,7 @@
     "_server:build": "tsc -p ./server",
     "postinstall": "npm run build"
   },
-  "author": "Vlado Tešanović",
-  "repository": {
-    "url": "https://github.com/vladotesanovic/angular2-express-starter"
-  },
+  "author": "Jon Preece",
   "private": true,
   "dependencies": {
     "@angular/common": "^2.4.4",
