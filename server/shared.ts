@@ -64,3 +64,8 @@ export interface FitbitStats {
     goals: FitbitGoals;
     summary: FitbitSummary;
 }
+
+export interface FitbitActivitiesCalories {
+    dateTime: String;
+    value: String;
+}

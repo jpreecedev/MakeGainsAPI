@@ -1,5 +1,5 @@
 import { Router, Response, Request } from 'express';
-import { getServiceUrl, FitbitResponse, FitbitFat, FitbitStats } from '../shared';
+import { getServiceUrl, FitbitResponse, FitbitFat, FitbitStats, FitbitActivitiesCalories } from '../shared';
 import User from '../models/user/user.controller';
 import { IUser } from '../models/user/user.model';
 
@@ -31,6 +31,21 @@ router.get('/callback', (request: Request, response: Response) => {
             response.send(error);
         });
 });
+
+router.get('/calories/:encodedId/:from/:to', (request: Request, response: Response) => {
+
+    User.getByEncodedId(request.params.encodedId, (err, user: IUser) => {
+        client.get(`/activities/calories/date/${request.params.from}/${request.params.to}.json`, user.access_token)
+            .then((result) => {
+                let data: FitbitActivitiesCalories[] = result[0]['activities-calories'];
+                response.send(data);
+            })
+            .catch((error) => {
+                response.send(error);
+            });
+    });
+});
+
 
 router.get('/stats/:encodedId/:date', (request: Request, response: Response) => {
 
