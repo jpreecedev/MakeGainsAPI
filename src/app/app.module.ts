@@ -16,10 +16,10 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     FormsModule,
     HttpModule,
-    routing,
+    routing
   ],
   bootstrap: [
     AppComponent
   ]
 })
-export class AppModule {}
+export class AppModule { }

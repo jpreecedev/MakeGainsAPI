@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ModalComponent, ModalDirectivesDirective } from './modal/modal.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 import { InputComponent } from './input/input.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
@@ -10,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   declarations: [
     ModalComponent,
     ModalDirectivesDirective,
+    HeaderComponent,
     InputComponent
   ],
   imports: [
@@ -21,6 +23,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   exports: [
     ModalComponent,
     ModalDirectivesDirective,
+    HeaderComponent,
     InputComponent
   ]
 })
