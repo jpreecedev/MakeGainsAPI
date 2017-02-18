@@ -9,7 +9,9 @@ export class HeaderComponent {
 
     scroll(target: string) {
         let element = document.querySelector(target);
-        element.scrollIntoView();
+        if (element) {
+            element.scrollIntoView();
+        }
     }
 
 }

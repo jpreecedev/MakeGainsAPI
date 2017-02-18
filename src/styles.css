@@ -95,3 +95,7 @@ footer {
   bottom: 5px;
   right: 5px;
 }
+
+.block {
+    display: block;
+}
