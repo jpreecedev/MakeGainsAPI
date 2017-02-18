@@ -26,7 +26,10 @@ const addOrUpdate = (fitbitUser: any, request: Request, response: Response, next
                 return next();
             });
         } else {
-            return next(result[0]);
+            result[0].access_token = fitbitUser.access_token;
+            result[0].save(() => {
+                return next();
+            });
         }
     });
 };
