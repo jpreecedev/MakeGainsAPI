@@ -1,12 +1,10 @@
-<div class="row">
-  <div class="col-xs-12">
-    <div>
-      <canvas baseChart width="400" height="200"
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [colors]="lineChartColors"
-                  [chartType]="lineChartType"></canvas>
-      </div>
-  </div>
+<h2>Calories Burnt (last 14 days)</h2>
+<hr class="small">
+<div>
+  <canvas baseChart width="400" height="200"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [chartType]="lineChartType"></canvas>
 </div>

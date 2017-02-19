@@ -69,3 +69,13 @@ export interface FitbitActivitiesCalories {
     dateTime: String;
     value: String;
 }
+
+export interface FitbitFoodSummary {
+    calories: Number;
+    carbs: Number;
+    fat: Number;
+    fiber: Number;
+    protein: Number;
+    sodium: Number;
+    water: Number;
+}
